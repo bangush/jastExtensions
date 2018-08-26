@@ -1,4 +1,4 @@
-[![Build status](https://ci.appveyor.com/api/projects/status/gn2x6yuhyahookk2?svg=true)](https://ci.appveyor.com/project/iss0/jastExtensions)
+[![Build status](https://ci.appveyor.com/api/projects/status/e9td2y2war68130e?svg=true)](https://ci.appveyor.com/project/iss0/jastextensions)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](http://opensource.org/licenses/MIT)
 
 | Package Name                  | Status                                   |
