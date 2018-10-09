@@ -24,11 +24,29 @@ var decryptedString = encryptedString.Decrypt(secretKey);
 ```
 ```csharp
 // String conversion
-const string boolString = "true";
-const string intString = "1337";
-bool boolResult = boolString.ToBool();
-int inResult = boolString.ToInt();
+bool boolResult = "true".ToBool();
+int intResult = "1337".ToInt();
 
-cosnt string testString = "hello world"
-var camelCase = testString.ToCamelCase(); // helloWorld
+var camelCase = "hello world".ToCamelCase(); // camelCase = "helloWorld"
+```
+
+```csharp
+// Linq foreach
+var listOfExecuted = new List<int>();
+
+Enumerable
+    .Range(0, 10)
+    .Skip(1)
+    .Take(2)
+    .ForEachInvoke(i => listOfExecuted.Add(i)); // enumerate and invoke
+
+var enumerable = Enumerable
+    .Range(0, 10)
+    .Skip(1)
+    .Take(2)
+    .ForEach(i => Console.WriteLine(i)); // not enumerated yet, no console output
+
+var list = enumerable.ToList(); // list contains { 1, 2 } and these two numbers are printed on console
+
+// listOfExecuted = { 1, 2 }
 ```
