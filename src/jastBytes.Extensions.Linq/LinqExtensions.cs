@@ -26,42 +26,52 @@ namespace System.Collections.Generic
     public static class LinqExtensions
     {
         /// <summary>
-        /// Iterates through the collection and invokes every element by the given selector
-        /// </summary>
-        /// <typeparam name="TSource"></typeparam>
-        /// <typeparam name="TResult"></typeparam>
-        /// <param name="source"></param>
-        /// <param name="selector"></param>
-        public static void ForEach<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, TResult> selector)
-        {
-            if (source == null) throw new ArgumentNullException(nameof(source));
-            if (selector == null) throw new ArgumentNullException(nameof(selector));
-
-            foreach (var item in source)
-            {
-                selector.Invoke(item);
-            }
-        }
-
-        /// <summary>
-        /// Iterates through the collection and invokes the action on every element
+        /// Invokes given action on every element in sequence
         /// </summary>
         /// <typeparam name="TSource"></typeparam>
         /// <param name="source"></param>
         /// <param name="action"></param>
-        /// <returns></returns>
         public static IEnumerable<TSource> ForEach<TSource>(this IEnumerable<TSource> source, Action<TSource> action)
         {
-            if (source == null) throw new ArgumentNullException(nameof(source));
-            if (action == null) throw new ArgumentNullException(nameof(action));
+            if (source == null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
 
-            var forEach = source as TSource[] ?? source.ToArray();
-            foreach (var item in forEach)
+            if (action == null)
+            {
+                throw new ArgumentNullException(nameof(action));
+            }
+
+            foreach (var item in source)
+            {
+                action.Invoke(item);
+                yield return item;
+            }
+        }
+
+        /// <summary>
+        /// Enumerates the sequence and invokes given action on every element in sequence
+        /// </summary>
+        /// <typeparam name="TSource"></typeparam>
+        /// <param name="source"></param>
+        /// <param name="action"></param>
+        public static void ForEachInvoke<TSource>(this IEnumerable<TSource> source, Action<TSource> action)
+        {
+            if (source == null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            if (action == null)
+            {
+                throw new ArgumentNullException(nameof(action));
+            }
+
+            foreach (var item in source)
             {
                 action.Invoke(item);
             }
-
-            return forEach;
         }
 
         /// <summary>
