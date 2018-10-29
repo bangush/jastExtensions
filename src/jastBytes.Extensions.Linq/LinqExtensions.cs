@@ -25,6 +25,8 @@ namespace System.Collections.Generic
 {
     public static class LinqExtensions
     {
+        private static readonly Random Random = new Random((int)DateTime.Now.Ticks);
+
         /// <summary>
         /// Invokes given action on every element in sequence
         /// </summary>
@@ -75,14 +77,45 @@ namespace System.Collections.Generic
         }
 
         /// <summary>
+        /// Enumerates the sequence and shuffles all elements
+        /// </summary>
+        /// <typeparam name="TSource"></typeparam>
+        /// <param name="source"></param>
+        public static List<TSource> Shuffle<TSource>(this IEnumerable<TSource> source)
+        {
+            if (source == null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            var toShuffle = source.ToList();
+            var i = toShuffle.Count;
+
+            while (i-- > 1)
+            {
+                var randomIdx = Random.Next(i + 1);
+                var value = toShuffle[randomIdx];
+                toShuffle[randomIdx] = toShuffle[i];
+                toShuffle[i] = value;
+            }
+            
+            return toShuffle;
+        }
+
+        /// <summary>
         /// Removes all elements from the collection which are null 
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="enumerable"></param>
+        /// <param name="source"></param>
         /// <returns></returns>
-        public static IEnumerable<T> NotNull<T>(this IEnumerable<T> enumerable)
+        public static IEnumerable<T> NotNull<T>(this IEnumerable<T> source)
         {
-            return enumerable.Where(t => t != null);
+            if (source == null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            return source.Where(t => t != null);
         }
 
         /// <summary>
@@ -94,6 +127,11 @@ namespace System.Collections.Generic
         /// <returns></returns>
         public static IDictionary<TKey, TValue> ValueNotNull<TKey, TValue>(this IDictionary<TKey, TValue> dictionary)
         {
+            if (dictionary == null)
+            {
+                throw new ArgumentNullException(nameof(dictionary));
+            }
+
             return dictionary.Where(pair => pair.Value != null).ToDictionary(pair => pair.Key, pair => pair.Value);
         }
     }

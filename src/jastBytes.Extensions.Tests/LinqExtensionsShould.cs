@@ -21,5 +21,22 @@ namespace jastBytes.Extensions.Tests
             Assert.True(listOfExecuted.Count == 2);
             Assert.Equal(enumerated, listOfExecuted);
         }
+
+        [Fact]
+        public void Shuffle()
+        {
+            var enumerable = Enumerable.Range(0, 1000);
+
+            var enumerated = enumerable
+                .Shuffle();
+
+            var ordered = true;
+            for (var i = 0; i < enumerated.Count; i++)
+            {
+                ordered = enumerated[i] == i;
+                if (!ordered) break;
+            }
+            Assert.True(!ordered);
+        }
     }
 }
