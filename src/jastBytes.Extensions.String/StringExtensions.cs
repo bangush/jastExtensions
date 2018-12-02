@@ -431,21 +431,22 @@ namespace System
             if (input == null || input.Length < 2)
                 return input;
 
-            // Split the string into words.
-            var words = input.Split(
-                new[] { ' ', '-', '_' },
-                StringSplitOptions.RemoveEmptyEntries);
+            var matches = Regex.Matches(input, @"[a-z]+|[0-9]+|(?:[A-Z][a-z]+)|(?:[A-Z]+(?=(?:[A-Z][a-z])|[^AZa-z]|[$\d\n]))");
 
             // Combine the words.
-            var result = words[0].ToLower();
-            for (var i = 1; i < words.Length; i++)
+            var stringBuilder = new StringBuilder();
+            stringBuilder.Append(matches[0].Value.ToLowerInvariant());
+
+            if (matches.Count < 2) return stringBuilder.ToString();
+
+            for (var i = 1; i < matches.Count; i++)
             {
-                result +=
-                    words[i].Substring(0, 1).ToUpper() +
-                    words[i].Substring(1);
+
+                stringBuilder.Append(char.ToUpperInvariant(matches[i].Value[0]));
+                stringBuilder.Append(matches[i].Value.Substring(1));
             }
 
-            return result;
+            return stringBuilder.ToString();
         }
 
         /// <summary>

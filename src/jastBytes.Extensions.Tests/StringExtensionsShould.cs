@@ -40,7 +40,9 @@ namespace jastBytes.Extensions.Tests
         }
 
         [Theory]
+        [InlineData("XML_Serializer", "xmlSerializer")]
         [InlineData("hello world", "helloWorld")]
+        [InlineData("HelloWorld", "helloWorld")]
         [InlineData("secret-string-to-camel", "secretStringToCamel")]
         public void CamelCase(string testString, string expected)
         {
