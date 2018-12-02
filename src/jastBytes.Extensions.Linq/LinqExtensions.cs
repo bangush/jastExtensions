@@ -20,6 +20,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace System.Collections.Generic
 {
@@ -53,6 +54,29 @@ namespace System.Collections.Generic
         }
 
         /// <summary>
+        /// Invokes given function asynchronously on every element in sequence and returns the awaitable results
+        /// </summary>
+        /// <typeparam name="TSource"></typeparam>
+        /// <typeparam name="TResult"></typeparam>
+        /// <param name="source"></param>
+        /// <param name="func"></param>
+        /// <returns></returns>
+        public static Task<TResult[]> SelectAsync<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, Task<TResult>> func)
+        {
+            if (source == null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            if (func == null)
+            {
+                throw new ArgumentNullException(nameof(func));
+            }
+
+            return Task.WhenAll(source.Select(func.Invoke));
+        }
+
+        /// <summary>
         /// Enumerates the sequence and invokes given action on every element in sequence
         /// </summary>
         /// <typeparam name="TSource"></typeparam>
@@ -74,6 +98,28 @@ namespace System.Collections.Generic
             {
                 action.Invoke(item);
             }
+        }
+
+        /// <summary>
+        /// Invokes given function asynchronously on every element in sequence and returns the awaitable Task
+        /// </summary>
+        /// <typeparam name="TSource"></typeparam>
+        /// <param name="source"></param>
+        /// <param name="func"></param>
+        /// <returns></returns>
+        public static Task ForEachAsync<TSource>(this IEnumerable<TSource> source, Func<TSource, Task> func)
+        {
+            if (source == null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            if (func == null)
+            {
+                throw new ArgumentNullException(nameof(func));
+            }
+
+            return Task.WhenAll(source.Select(func.Invoke));
         }
 
         /// <summary>
