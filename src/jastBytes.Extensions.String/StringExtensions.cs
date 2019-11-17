@@ -320,7 +320,7 @@ namespace System
         {
             return int.TryParse(stringValue, out _);
         }
-        
+
         /// <summary>
         /// returns if string can parse to bool
         /// </summary>
@@ -554,6 +554,17 @@ namespace System
                 return entityType;
             }
             return null;
+        }
+
+        /// <summary>Concatenates the members of a constructed <see cref="T:System.Collections.Generic.IEnumerable`1" /> collection of type <see cref="T:System.String" />, using the specified separator between each member.</summary>
+        /// <param name="separator">The string to use as a separator.<paramref name="separator" /> is included in the returned string only if <paramref name="values" /> has more than one element.</param>
+        /// <param name="values">A collection that contains the strings to concatenate.</param>
+        /// <returns>A string that consists of the members of <paramref name="values" /> delimited by the <paramref name="separator" /> string. If <paramref name="values" /> has no members, the method returns <see cref="F:System.String.Empty" />.</returns>
+        /// <exception cref="T:System.ArgumentNullException">
+        /// <paramref name="values" /> is <see langword="null" />. </exception>
+        public static string Join(this IEnumerable<string> values, string separator)
+        {
+            return string.Join(separator, values);
         }
     }
 }
