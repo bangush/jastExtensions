@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\jastBytes.Extensions.ErrorHandling\jastBytes.Extensions.ErrorHandling.csproj" />
+    <ProjectReference Include="..\jastBytes.Extensions.ErrorHandling\jastBytes.Extensions.ErrorHandling.csproj" />
     <ProjectReference Include="..\jastBytes.Extensions.Linq\jastBytes.Extensions.Linq.csproj" />
     <ProjectReference Include="..\jastBytes.Extensions.String\jastBytes.Extensions.String.csproj" />
   </ItemGroup>
