@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "jastBytes.Extensions.Direct
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "jastBytes.Extensions.Linq", "src\jastBytes.Extensions.Linq\jastBytes.Extensions.Linq.csproj", "{7E3234F4-B409-4B38-994B-D80E336E50EA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "jastBytes.Extensions.ErrorHandling", "jastBytes.Extensions.ErrorHandling\jastBytes.Extensions.ErrorHandling.csproj", "{4DC976F1-399F-4F8F-82FE-5CE185D3E34C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "jastBytes.Extensions.ErrorHandling", "src\jastBytes.Extensions.ErrorHandling\jastBytes.Extensions.ErrorHandling.csproj", "{4DC976F1-399F-4F8F-82FE-5CE185D3E34C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
